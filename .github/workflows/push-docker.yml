@@ -32,4 +32,4 @@ jobs:
           context: .
           platforms: linux/amd64
           push: true
-          tags: bdallard/python-ci:latest
+          tags: joker92000/python-ci:latest
