@@ -1,5 +1,5 @@
-# Start with the FastAPI base image
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9
+# Start with a Python base image that supports linux/arm/v7
+FROM python:3.9-slim
 
 # Set the working directory
 WORKDIR /app
@@ -10,12 +10,11 @@ COPY . /app
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install uvicorn and gunicorn separately
+RUN pip install uvicorn gunicorn fastapi
+
 # Expose the port the app runs on
 EXPOSE 8001
-
-# Optionally, set environment variables from .env file
-# COPY .env /app
-# ENV ENV_FILE_LOCATION=/app/.env
 
 # Command to run the app
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8001"]
